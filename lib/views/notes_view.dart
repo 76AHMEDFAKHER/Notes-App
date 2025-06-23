@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/views/widgets/add_bottom_sheeet.dart';
 import 'package:notes_app/views/widgets/notes_view_body.dart';
 
 class NotesView extends StatelessWidget {
@@ -26,14 +27,5 @@ class NotesView extends StatelessWidget {
       ),
       body: const NotesViewBody(),
     );
-  }
-}
-
-class AddBottomSheeet extends StatelessWidget {
-  const AddBottomSheeet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }

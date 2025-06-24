@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_app/cubits/cubit/notes_list_cubit.dart';
 import 'package:notes_app/views/widgets/add_bottom_sheeet.dart';
 import 'package:notes_app/views/widgets/notes_view_body.dart';
 
@@ -16,7 +18,9 @@ class NotesView extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
 
         onPressed: () {
-          showDialog(
+          showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
             context: context,
             builder: (context) {
               return const AddBottomSheeet();

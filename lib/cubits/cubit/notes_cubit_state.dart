@@ -18,7 +18,12 @@ final class NotesCubitError extends NotesCubitState {
 
   NotesCubitError(this.errorMessage);
 
-  showError() {
+  void logError() {
     log('Error: $errorMessage');
+  }
+
+  showError(stack) {
+    log('Error: $errorMessage');
+    log('Stack trace: $stack');
   }
 }

@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:notes_app/constant.dart';
 import 'package:notes_app/cubits/cubit/notes_cubit_cubit.dart';
+import 'package:notes_app/cubits/cubit/notes_list_cubit.dart';
 import 'package:notes_app/model/notes_model.dart';
+import 'package:notes_app/simple_bloc_observer.dart';
 import 'package:notes_app/views/notes_view.dart';
 
 void main() async {
@@ -17,9 +19,9 @@ void main() async {
   //
   try {
     await Hive.initFlutter();
-
-    await Hive.openBox(notesBox);
+    Bloc.observer = SimpleBlocObserver();
     Hive.registerAdapter(NotesModelAdapter());
+    await Hive.openBox<NotesModel>(notesBox);
   } catch (e, stack) {
     log('Error initializing Hive: $e');
     log('Stack trace: $stack');
@@ -32,8 +34,8 @@ class NotesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => NotesCubitCubit())],
+    return BlocProvider(
+      create: (context) => NotesListCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Notes App',

@@ -12,12 +12,14 @@ class NotesCubitCubit extends Cubit<NotesCubitState> {
   NotesCubitCubit() : super(NotesCubitInitial());
 
   addNote(NotesModel note) async {
-    emit(NotesCubitLoading());
-
+    // emit(NotesCubitLoading());
     try {
-      var notesHiveBox = Hive.box<NotesModel>(notesBox);
+      var notesHiveBox = Hive.box<NotesModel>(
+        notesBox,
+      ); // just get the box, don't open
       await notesHiveBox.add(note);
       emit(NotesCubitSucces(notesHiveBox.values.toList()));
+      log('Note added successfully: ${note.title}');
     } catch (e, stack) {
       log('Error adding note: $e');
       log('Stack trace: $stack');
